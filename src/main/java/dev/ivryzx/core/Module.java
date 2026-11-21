@@ -5,7 +5,7 @@ import java.util.*;
 
 /**
  * One class, many sections. A module registered in both PVP and PVE gets two
- * independent State objects (own enabled flag, keybind, settings).
+ * independent State objects (own enabled flag, keybind, settings, scratch values).
  */
 public abstract class Module {
     public final String name, description;
@@ -21,9 +21,21 @@ public abstract class Module {
         public boolean enabled;
         public int keyCode = -1;
         public final List<Setting<?>> settings = new ArrayList<>();
+
+        /** Scratch values a module may use between ticks (timers, previous state). */
+        public int counter;
+        public boolean flag;
+
+        private Setting<?> find(String n) {
+            for (Setting<?> s : settings) if (s.name.equals(n)) return s;
+            throw new IllegalArgumentException("No setting named " + n);
+        }
+        public boolean bool(String n) { return ((Setting.Bool) find(n)).get(); }
+        public double num(String n) { return ((Setting.Number) find(n)).get(); }
+        public String mode(String n) { return ((Setting.Mode) find(n)).get(); }
     }
 
-    /** Called once per section this module is registered in. Keep the returned settings in a per-section map. */
+    /** Called once per section this module is registered in. */
     protected abstract void defineSettings(Section section, SettingBuilder b);
     protected void onEnable(Section s, Minecraft mc) {}
     protected void onDisable(Section s, Minecraft mc) {}
