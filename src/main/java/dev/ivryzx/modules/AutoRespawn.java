@@ -1,6 +1,11 @@
 package dev.ivryzx.modules;
 
-import dev.ivryzx.core.*;
+import dev.ivryzx.core.Module;
+import dev.ivryzx.core.Section;
+import dev.ivryzx.core.Setting;
+import dev.ivryzx.core.SettingBuilder;
+import dev.ivryzx.core.Category;
+import dev.ivryzx.core.Status;
 import net.minecraft.client.Minecraft;
 import java.util.EnumMap;
 
@@ -17,7 +22,7 @@ public final class AutoRespawn extends Module {
         delay.put(s, b.number("Delay (ticks)", 10, 0, 100, 1));
     }
 
-    @Override protected void onTick(Section s, Minecraft mc, State st) {
+    @Override protected void onTick(Section s, Minecraft mc, Module.State st) {
         if (mc.player == null) return;
         if (mc.player.isDeadOrDying()) {
             int t = timer.merge(s, 1, Integer::sum);
