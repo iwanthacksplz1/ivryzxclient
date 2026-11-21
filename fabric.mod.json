@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "id": "ivryzx",
+  "version": "0.1.0",
+  "name": "iVryzx Client",
+  "environment": "client",
+  "entrypoints": { "client": ["dev.ivryzx.IVryzxClient"] },
+  "depends": { "fabricloader": ">=0.19.5", "minecraft": "~26.3", "java": ">=25", "fabric-api": "*" }
+}
