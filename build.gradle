@@ -1,28 +1,14 @@
 plugins {
-	id 'net.fabricmc.fabric-loom' version "${loom_version}"
+	id 'net.fabricmc.fabric-loom' version '1.19-SNAPSHOT'
 }
 
-loom {
-	mods {
-		"ivryzx" {
-			sourceSet sourceSets.main
-		}
-	}
-}
+version = '0.1.0'
+group = 'dev.ivryzx'
 
 dependencies {
-	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
-	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
-}
-
-processResources {
-	def version = project.version
-	inputs.property "version", version
-
-	filesMatching("fabric.mod.json") {
-		expand "version": version
-	}
+	minecraft "com.mojang:minecraft:26.3"
+	implementation "net.fabricmc:fabric-loader:0.20.1"
+	implementation "net.fabricmc.fabric-api:fabric-api:0.166.2+26.3"
 }
 
 tasks.withType(JavaCompile).configureEach {
